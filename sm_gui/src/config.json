@@ -1,0 +1,4 @@
+{
+  "apiServerPath": "http://localhost:8080/",
+  "apiEndpointLogin": "auth"
+}

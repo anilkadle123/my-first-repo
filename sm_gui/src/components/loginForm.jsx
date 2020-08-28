@@ -24,7 +24,16 @@ class LoginForm extends Form {
     const { apiServerPath, apiEndpointLogin } = config;
     try {
       await http.post(apiServerPath + apiEndpointLogin, this.state.data);
-      toast("Logged In");
+      const { state = {} } = this.props.location;
+      const { prevLocation } = state;
+      //const { onLoginSuccess } = this.props;
+      this.props.onLoginSuccess();
+
+      console.log("Prev loc", prevLocation);
+      this.props.history.push(prevLocation || "/purchaseEntry");
+
+      // this.props.history.replace("/purchaseEntry");
+      //toast("Logged In");
     } catch (ex) {
       toast.error("Invalid Credentials!!");
       console.log("Exception", ex);
@@ -35,6 +44,8 @@ class LoginForm extends Form {
 
   componentDidMount() {
     //this.username.current.focus();
+
+    console.log(this.props);
   }
 
   render() {

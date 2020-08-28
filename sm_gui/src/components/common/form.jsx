@@ -6,6 +6,8 @@ class Form extends Component {
   state = {
     data: {},
     errors: {},
+    loggedIn: false,
+    prevLocation: "",
   };
   validate = () => {
     const options = {
@@ -59,7 +61,7 @@ class Form extends Component {
     );
   }
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type = "text", includeLabel = false) {
     const { data, errors } = this.state;
 
     return (
@@ -70,6 +72,7 @@ class Form extends Component {
         value={data[name]}
         onChange={this.handleChange}
         error={errors[name]}
+        includeLabel={includeLabel}
       ></Input>
     );
   }

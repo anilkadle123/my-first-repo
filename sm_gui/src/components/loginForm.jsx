@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css/";
 
 class LoginForm extends Form {
   state = {
-    data: { username: "", password: "" },
+    data: { username: "guru", password: "guru" },
     errors: {},
   };
 
@@ -29,7 +29,6 @@ class LoginForm extends Form {
       //const { onLoginSuccess } = this.props;
       this.props.onLoginSuccess();
 
-      console.log("Prev loc", prevLocation);
       this.props.history.push(prevLocation || "/purchaseEntry");
 
       // this.props.history.replace("/purchaseEntry");

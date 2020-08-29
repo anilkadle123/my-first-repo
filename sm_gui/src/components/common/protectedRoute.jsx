@@ -3,7 +3,6 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
 const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
-  console.log("logged in ", loggedIn, path);
   return (
     <Route
       path={path}

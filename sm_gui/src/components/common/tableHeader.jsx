@@ -18,22 +18,38 @@ class TableHeader extends Component {
     return <i className="fa fa-sort-desc"></i>;
   };
   render() {
-    return (
-      <thead>
-        <tr>
-          {this.props.columns.map((column) => (
-            <th
-              className="clickable"
-              key={column.path || column.key}
-              onClick={() => this.raiseSort(column.path)}
-            >
-              {column.label}
-              {this.renderSortIcon(column)}
-            </th>
-          ))}
-        </tr>
-      </thead>
-    );
+    const { sortDisable } = this.props;
+
+    if (sortDisable === true) {
+      return (
+        <thead>
+          <tr>
+            {this.props.columns.map((column) => (
+              <th className="" key={column.path || column.key}>
+                {column.label}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      );
+    } else {
+      return (
+        <thead>
+          <tr>
+            {this.props.columns.map((column) => (
+              <th
+                className="clickable"
+                key={column.path || column.key}
+                onClick={() => this.raiseSort(column.path)}
+              >
+                {column.label}
+                {this.renderSortIcon(column)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      );
+    }
   }
 }
 

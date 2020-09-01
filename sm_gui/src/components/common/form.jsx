@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 class Form extends Component {
   state = {
     data: {},
@@ -21,12 +25,15 @@ class Form extends Component {
     error.details.map((item) => {
       errors[item.path[0]] = item.message;
     });
+    console.log(error);
     return errors;
   };
   validateProperty = ({ name, value }) => {
     const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
+
     const { error } = Joi.validate(obj, schema);
+
     return error ? error.details[0].message : null;
   };
 
@@ -41,7 +48,7 @@ class Form extends Component {
     this.doSubmit();
   };
 
-  handleChange = ({ currentTarget: input }) => {
+  validateForms = (input) => {
     const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
@@ -52,16 +59,39 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  handleChange = ({ currentTarget: input }) => {
+    this.validateForms(input);
+  };
+
   renderButton(label) {
     //console.log(this.validate());
     return (
-      <button disabled={this.validate()} className="btn btn-primary">
+      <button disabled={this.validate()} className="btn btn-primary mr-2">
         {label}
       </button>
     );
   }
 
-  renderInput(name, label, type = "text", includeLabel = false) {
+  renderDatePicker = (name) => {
+    const { data, errors } = this.state;
+    return (
+      <DatePicker
+        selected={this.state.data[name]}
+        customInput={
+          <Input
+            type="text"
+            name={name}
+            value={data[name]}
+            readOnly="readOnly"
+          ></Input>
+        }
+        onChange={this.handleDateChange}
+        dateFormat="dd/MM/yyyy"
+      />
+    );
+  };
+
+  renderInput = (name, label, type = "text", includeLabel = false) => {
     const { data, errors } = this.state;
 
     return (
@@ -75,7 +105,7 @@ class Form extends Component {
         includeLabel={includeLabel}
       ></Input>
     );
-  }
+  };
 
   renderSelect(name, label, options) {
     const { data, errors } = this.state;

@@ -36,7 +36,7 @@ class LoginForm extends Form {
     } catch (ex) {
       toast.error("Invalid Credentials!!");
       console.log("Exception", ex);
-      const data = { ...this.state.data };
+      //const data = { ...this.state.data };
       this.setState({});
     }
   };

@@ -1,3 +1,5 @@
+//import { getAllItems } from "./services/fakeItemService";
+const getAllItems = require("./services/fakeItemService");
 const express = require("express");
 var cors = require("cors");
 
@@ -16,8 +18,10 @@ app.get("/", (req, res) => {
   res.send("Welcome to Supermarket REST API Library");
 });
 
-app.get("/login", (req, res) => {
-  res.send("Login");
+app.get("/getAllItems", (req, res) => {
+  const items = getAllItems();
+
+  res.send(items);
 });
 app.post("/auth", (req, res) => {
   const { username, password } = req.body;

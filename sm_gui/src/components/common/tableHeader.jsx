@@ -22,7 +22,7 @@ class TableHeader extends Component {
 
     if (sortDisable === true) {
       return (
-        <thead>
+        <thead className="thead-light">
           <tr>
             {this.props.columns.map((column) => (
               <th className="" key={column.path || column.key}>

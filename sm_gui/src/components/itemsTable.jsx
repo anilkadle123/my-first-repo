@@ -5,8 +5,13 @@ import { Link } from "react-router-dom";
 
 class ItemsTable extends Component {
   columns = [
-    { key: "slno", label: "Sl No" },
-    { path: "itemcode", label: "Item Code" },
+    {
+      key: "slno",
+      label: "Sl No",
+
+      content: (item, index) => <div>{index + 1}</div>,
+    },
+    { path: "itemCode", label: "Item Code" },
     { path: "itemName", label: "Item Name" },
     { path: "price", label: "Price" },
     { path: "qty", label: "QTY" },
@@ -23,20 +28,26 @@ class ItemsTable extends Component {
     }, */
     {
       key: "delete",
-      content: (item) => (
+      content: (item, index) => (
         <button
+          type="button"
           onClick={() => this.props.onDelete(item)}
           className="btn btn-danger btn-sm"
         >
-          Delete
+          X
         </button>
       ),
     },
   ];
   render() {
-    const { items } = this.props;
+    const { items, getClassName } = this.props;
     return (
-      <Table columns={this.columns} data={items} sortDisable={true}></Table>
+      <Table
+        columns={this.columns}
+        data={items}
+        sortDisable={true}
+        getClassName={getClassName}
+      ></Table>
     );
   }
 }

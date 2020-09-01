@@ -1,4 +1,5 @@
 {
   "apiServerPath": "http://localhost:8080/",
-  "apiEndpointLogin": "auth"
+  "apiEndpointLogin": "auth",
+  "apiEndpointGetAllItems": "getAllItems"
 }

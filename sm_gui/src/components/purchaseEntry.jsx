@@ -7,6 +7,8 @@ import ItemsTable from "./itemsTable";
 import Items from "./items";
 import PurchaseEntryInputs from "./purchaseEntryInputs";
 
+import ModalReact from "./common/modalReact";
+
 class PurchaseEntry extends Form {
   state = {
     data: {
@@ -34,7 +36,7 @@ class PurchaseEntry extends Form {
   clearStates = () => {
     this.setState({
       data: {
-        date: "",
+        date: new Date(),
         billNumber: "",
         partyName: "",
         gstNumber: "",
@@ -46,6 +48,9 @@ class PurchaseEntry extends Form {
 
       lastUpdatedIndex: -1,
     });
+  };
+  doNothing = () => {
+    //  console.log("Entry will be saved");
   };
   getrowClassName = (rowIndex) => {
     return rowIndex === this.state.lastUpdatedIndex ? "table-primary" : "";
@@ -101,13 +106,15 @@ class PurchaseEntry extends Form {
 
           {this.renderButton("Add")}
 
-          <button
-            type="button"
-            className="btn btn-primary mr-2"
-            onClick={this.clearStates}
-          >
-            Clear
-          </button>
+          <ModalReact
+            triggerButtonLabel="Clear"
+            title="Confirm"
+            body="Do you want to clear all fields?"
+            continueLabel="Yes"
+            cancelLabel="No"
+            onContinue={this.doNothing}
+            onCancel={this.clearStates}
+          />
         </form>
       </div>
     );

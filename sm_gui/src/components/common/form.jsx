@@ -25,7 +25,7 @@ class Form extends Component {
     error.details.map((item) => {
       errors[item.path[0]] = item.message;
     });
-    console.log(error);
+    //console.log(error);
     return errors;
   };
   validateProperty = ({ name, value }) => {

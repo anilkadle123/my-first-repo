@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Table from "./common/table";
 
-import { Link } from "react-router-dom";
-
 class ItemsTable extends Component {
   columns = [
     {

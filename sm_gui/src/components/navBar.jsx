@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import PurchaseEntry from "./purchaseEntry";
 
 const NavBar = (props) => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);

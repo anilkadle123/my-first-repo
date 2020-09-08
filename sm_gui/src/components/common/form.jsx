@@ -24,6 +24,7 @@ class Form extends Component {
     const errors = {};
     error.details.map((item) => {
       errors[item.path[0]] = item.message;
+      return errors;
     });
     //console.log(error);
     return errors;
@@ -73,7 +74,7 @@ class Form extends Component {
   }
 
   renderDatePicker = (name) => {
-    const { data, errors } = this.state;
+    const { data } = this.state;
     return (
       <DatePicker
         selected={this.state.data[name]}

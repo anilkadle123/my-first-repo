@@ -14,7 +14,7 @@ class TableBody extends Component {
     const {
       data,
       columns,
-      textProperty,
+
       valueProperty,
       getClassName,
     } = this.props;

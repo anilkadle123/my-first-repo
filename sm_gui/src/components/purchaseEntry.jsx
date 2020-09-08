@@ -82,7 +82,7 @@ class PurchaseEntry extends Form {
 
   doSubmit = async () => {};
   render() {
-    const { itemsAdded, data } = this.state;
+    const { itemsAdded } = this.state;
     //this.state.items.map((i) => console.log(i.itemCode));
     //console.log("Items", items);
     //items.ma

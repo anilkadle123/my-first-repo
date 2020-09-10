@@ -4,12 +4,17 @@ import Joi from "joi-browser";
 import Form from "./common/form";
 import http from "../services/httpService";
 import { toast, ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css/";
+import Modal from "./common/modal";
+import ModalReact from "./common/modalReact";
 
 class LoginForm extends Form {
   state = {
     data: { username: "guru", password: "guru" },
     errors: {},
+
+    showModal: true,
   };
 
   schema = {
@@ -47,6 +52,15 @@ class LoginForm extends Form {
     console.log(this.props);
   }
 
+  toggle = () => {
+    let { showModal } = this.state;
+    this.setState({ showModal: !showModal });
+  };
+
+  onClose = () => {
+    this.setState({ showModal: false });
+  };
+
   render() {
     return (
       <div>
@@ -57,6 +71,10 @@ class LoginForm extends Form {
           {this.renderInput("password", "Password", "password")}
 
           {this.renderButton("Login")}
+          <button onClick={this.toggle} type="button">
+            Toggle
+          </button>
+          <Modal show={this.state.showModal} onClose={this.onClose} />
         </form>
       </div>
     );

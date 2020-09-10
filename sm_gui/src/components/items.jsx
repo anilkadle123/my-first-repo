@@ -4,6 +4,8 @@ import http from "../services/httpService";
 import config from "../config.json";
 import Input from "./common/input";
 import Joi from "joi-browser";
+import { Autocomplete } from "./common/autoComplete";
+import { Link } from "react-router-dom";
 
 class Items extends Form {
   state = {
@@ -39,7 +41,24 @@ class Items extends Form {
     }
   };
 
+  handleSelectedItem = async (selectedItem) => {
+    //console.log(selectedItem);
+
+    //console.log(selectedItem.split("-")[0].trim());
+    if (selectedItem === null) {
+      alert("Item Not found");
+    } else {
+      const data = { ...this.state.data };
+      data.itemCode = selectedItem.split("-")[0].trim();
+
+      await this.setState({ data });
+      console.log("enter ", selectedItem);
+      this.searchByCode();
+    }
+  };
+
   searchByCode = () => {
+    console.log("search ", this.state.data.itemCode);
     const itemToAdd = this.state.items.filter(
       (i) => i.itemCode === this.state.data.itemCode
     );
@@ -76,7 +95,12 @@ class Items extends Form {
   };
 
   render() {
-    const { data, errors } = this.state;
+    const { data, errors, items } = this.state;
+
+    const itemNames = items.map(
+      (item) => `${item.itemCode} - ${item.itemName}`
+    );
+
     return (
       <div className="row">
         <div className="col-4">
@@ -91,7 +115,13 @@ class Items extends Form {
             includeLabel={false}
           ></Input>
         </div>
-        <div className="col-8">{this.renderInput("itemName", "Item Name")}</div>
+        <div className="col-8">
+          <Autocomplete
+            suggestions={itemNames}
+            onSelect={this.handleSelectedItem}
+            placeHolder="Search By Item Name"
+          />
+        </div>
       </div>
     );
   }

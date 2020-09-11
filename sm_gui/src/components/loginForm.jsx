@@ -70,7 +70,7 @@ class LoginForm extends Form {
           {this.renderInput("username", "Username")}
           {this.renderInput("password", "Password", "password")}
 
-          {this.renderButton("Login")}
+          {this.renderButton("log_Anil")}
           <button onClick={this.toggle} type="button">
             Toggle
           </button>

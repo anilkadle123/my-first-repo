@@ -7,7 +7,7 @@ class GstReport extends Component {
     return (
       <div>
         <NavBar />
-        <h1>GST Report--</h1>
+        <h1>GST Report--Chande made</h1>
       </div>
     );
   }
